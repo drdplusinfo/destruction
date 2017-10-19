@@ -27,6 +27,7 @@ class RollOnDestructionTest extends SimpleRollOnSuccessTest
         self::assertSame($rollOnQuality, $successfulRollOn->getRollOnQuality());
         self::assertGreaterThan($difficulty, $preconditions + $rollValue);
         self::assertSame('not_damaged', $successfulRollOn->getResult());
+        self::assertSame(789 + 456 - 456 + 123, $successfulRollOn->getValue());
 
         $failedRollOn = new RollOnDestruction(
             $this->createPowerOfDestruction($bonus = 1),
@@ -37,6 +38,7 @@ class RollOnDestructionTest extends SimpleRollOnSuccessTest
         self::assertSame($rollOnQuality, $failedRollOn->getRollOnQuality());
         self::assertLessThan($baseDifficulty - $bonus, $preconditions + $rollValue);
         self::assertSame('damaged', $failedRollOn->getResult());
+        self::assertSame(123 + 456 - 581 + 1, $failedRollOn->getValue());
     }
 
     /**

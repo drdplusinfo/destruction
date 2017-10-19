@@ -5,8 +5,9 @@ namespace DrdPlus\Destruction;
 
 use DrdPlus\RollsOn\QualityAndSuccess\RollOnQuality;
 use DrdPlus\RollsOn\QualityAndSuccess\SimpleRollOnSuccess;
+use Granam\Integer\IntegerInterface;
 
-class RollOnDestruction extends SimpleRollOnSuccess
+class RollOnDestruction extends SimpleRollOnSuccess implements IntegerInterface
 {
     const NOT_DAMAGED = 'not_damaged';
     const DAMAGED = 'damaged';
@@ -24,11 +25,21 @@ class RollOnDestruction extends SimpleRollOnSuccess
     {
         /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         parent::__construct(
-            $materialResistance->getValue() - $powerOfDestruction->getValue(),
+            $materialResistance->getValue() - $powerOfDestruction->getValue(), // as a difficulty
             $rollOnDestructing,
             self::NOT_DAMAGED,
             self::DAMAGED
         );
+    }
+
+    /**
+     * Final roll on destruction, including material resistance and power of destruction (weapon + strength)
+     *
+     * @return int
+     */
+    public function getValue(): int
+    {
+        return $this->getRollOnQuality()->getValue() - $this->getDifficulty();
     }
 
 }
