@@ -31,11 +31,11 @@ class DestructionTest extends TestWithMockery
         $armourer = $this->mockery(Armourer::class);
         $armourer->shouldReceive('getPowerOfDestruction')
             ->once()
-            ->with($hand, $strength, $itemHoldingCode)
+            ->with($hand, $strength, $itemHoldingCode, false)
             ->andReturn(456);
         /** @var Armourer $armourer */
         $destruction = new Destruction($this->createTablesWithArmourer($armourer));
-        $powerOfDestruction = $destruction->getPowerOfDestruction($hand, $strength, $itemHoldingCode);
+        $powerOfDestruction = $destruction->getPowerOfDestruction($hand, $strength, $itemHoldingCode, false);
         self::assertInstanceOf(PowerOfDestruction::class, $powerOfDestruction);
         self::assertSame(456, $powerOfDestruction->getValue());
     }

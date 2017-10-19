@@ -30,6 +30,7 @@ class Destruction extends StrictObject
      * @param MeleeWeaponlikeCode $meleeWeaponlikeCode
      * @param Strength $strength
      * @param ItemHoldingCode $itemHoldingCode
+     * @param bool $weaponIsInappropriate
      * @return PowerOfDestruction it is a bonus of destruction strength, not the final value
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotUseMeleeWeaponlikeBecauseOfMissingStrength
      * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownArmament
@@ -41,11 +42,12 @@ class Destruction extends StrictObject
     public function getPowerOfDestruction(
         MeleeWeaponlikeCode $meleeWeaponlikeCode,
         Strength $strength,
-        ItemHoldingCode $itemHoldingCode
+        ItemHoldingCode $itemHoldingCode,
+        bool $weaponIsInappropriate
     ): PowerOfDestruction
     {
         /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
-        return new PowerOfDestruction($meleeWeaponlikeCode, $strength, $itemHoldingCode, $this->tables);
+        return new PowerOfDestruction($meleeWeaponlikeCode, $strength, $itemHoldingCode, $weaponIsInappropriate, $this->tables);
     }
 
     /**

@@ -23,6 +23,7 @@ class PowerOfDestruction extends StrictObject implements IntegerInterface
      * @param MeleeWeaponlikeCode $meleeWeaponlikeCode
      * @param Strength $strength
      * @param ItemHoldingCode $itemHoldingCode
+     * @param bool $weaponIsInappropriate
      * @param Tables $tables
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotUseMeleeWeaponlikeBecauseOfMissingStrength
      * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownArmament
@@ -35,10 +36,16 @@ class PowerOfDestruction extends StrictObject implements IntegerInterface
         MeleeWeaponlikeCode $meleeWeaponlikeCode,
         Strength $strength,
         ItemHoldingCode $itemHoldingCode,
+        bool $weaponIsInappropriate,
         Tables $tables
     )
     {
-        $this->value = $tables->getArmourer()->getPowerOfDestruction($meleeWeaponlikeCode, $strength, $itemHoldingCode);
+        $this->value = $tables->getArmourer()->getPowerOfDestruction(
+            $meleeWeaponlikeCode,
+            $strength,
+            $itemHoldingCode,
+            $weaponIsInappropriate
+        );
     }
 
     public function getValue(): int

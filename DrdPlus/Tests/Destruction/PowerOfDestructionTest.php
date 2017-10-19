@@ -26,13 +26,14 @@ class PowerOfDestructionTest extends TestWithMockery
         $armourer = $this->mockery(Armourer::class);
         $armourer->shouldReceive('getPowerOfDestruction')
             ->once()
-            ->with($barbarianSword, $strength, $itemHoldingCode)
+            ->with($barbarianSword, $strength, $itemHoldingCode, false)
             ->andReturn(456);
         /** @var Armourer $armourer */
         $powerOfDestruction = new PowerOfDestruction(
             $barbarianSword,
             $strength,
             $itemHoldingCode,
+            false, /* weapon is appropriate */
             $this->createTablesWithArmourer($armourer)
         );
         self::assertSame(456, $powerOfDestruction->getValue());
@@ -42,6 +43,22 @@ class PowerOfDestructionTest extends TestWithMockery
             $powerOfDestruction,
             PowerOfDestruction::class . ' should be usable as an ' . IntegerInterface::class
         );
+
+        $armourer = $this->mockery(Armourer::class);
+        /** @var MockInterface $armourer */
+        $armourer->shouldReceive('getPowerOfDestruction')
+            ->once()
+            ->with($barbarianSword, $strength, $itemHoldingCode, true)
+            ->andReturn(111);
+        /** @var Armourer $armourer */
+        $powerOfDestruction = new PowerOfDestruction(
+            $barbarianSword,
+            $strength,
+            $itemHoldingCode,
+            true, /* weapon is inappropriate */
+            $this->createTablesWithArmourer($armourer)
+        );
+        self::assertSame(111, $powerOfDestruction->getValue());
     }
 
     /**
