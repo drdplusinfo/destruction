@@ -45,9 +45,7 @@ class Destruction extends StrictObject
     ): PowerOfDestruction
     {
         /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
-        return new PowerOfDestruction(
-            $this->tables->getArmourer()->getPowerOfDestruction($meleeWeaponlikeCode, $strength, $itemHoldingCode)
-        );
+        return new PowerOfDestruction($meleeWeaponlikeCode, $strength, $itemHoldingCode, $this->tables);
     }
 
     /**

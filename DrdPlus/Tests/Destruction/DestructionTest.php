@@ -23,7 +23,7 @@ class DestructionTest extends TestWithMockery
     /**
      * @test
      */
-    public function I_can_get_destruction_power()
+    public function I_can_get_power_of_destruction()
     {
         $hand = MeleeWeaponCode::getIt(MeleeWeaponCode::HAND);
         $strength = Strength::getIt(123);
