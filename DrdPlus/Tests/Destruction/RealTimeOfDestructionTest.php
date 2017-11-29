@@ -5,7 +5,6 @@ namespace DrdPlus\Destruction;
 
 use DrdPlus\Tables\Measurements\Distance\Distance;
 use DrdPlus\Tables\Measurements\Time\TimeBonus;
-use DrdPlus\Tables\Measurements\Time\TimeTable;
 use DrdPlus\Tables\Measurements\Volume\Volume;
 use DrdPlus\Tables\Measurements\Volume\VolumeTable;
 use DrdPlus\Tables\Tables;
@@ -23,7 +22,7 @@ class RealTimeOfDestructionTest extends TestWithMockery
         $realTimeOfDestruction = new RealTimeOfDestruction(
             $this->createBaseTimeOfDestruction(123),
             $this->createRollOnDestruction(456),
-            new TimeTable()
+            Tables::getIt()
         );
         self::assertSame(123 - 456, $realTimeOfDestruction->getValue());
         self::assertInstanceOf(
@@ -77,9 +76,10 @@ class RealTimeOfDestructionTest extends TestWithMockery
         $realTimeOfDestructionByVolume = new RealTimeOfDestruction(
             $baseTimeOfDestructionByVolume,
             $this->createRollOnDestruction(30 /* strength, luck */ - 18 /* material */),
-            Tables::getIt()->getTimeTable()
+            Tables::getIt()
         );
         self::assertSame(49, $realTimeOfDestructionByVolume->getValue());
+        $realTimeOfDestructionByVolume->getFatigue();
 
         $a = new Distance(5, Distance::METER, Tables::getIt()->getDistanceTable());
         $b = new Distance(3, Distance::METER, Tables::getIt()->getDistanceTable());
@@ -92,7 +92,7 @@ class RealTimeOfDestructionTest extends TestWithMockery
         $realTimeOfDestructionByDistanceBonuses = new RealTimeOfDestruction(
             $baseTimeOfDestructionByDistanceBonuses,
             $this->createRollOnDestruction(30 /* strength, luck */ - 18 /* material */),
-            Tables::getIt()->getTimeTable()
+            Tables::getIt()
         );
         self::assertSame(47, $realTimeOfDestructionByDistanceBonuses->getValue());
     }
