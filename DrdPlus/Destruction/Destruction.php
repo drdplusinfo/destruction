@@ -66,15 +66,15 @@ class Destruction extends StrictObject
     /**
      * @param PowerOfDestruction $powerOfDestruction
      * @param MaterialResistance $materialResistance
-     * @param RollOnQuality $rollOnDestruction
+     * @param RollOnQuality $rollOnDestructing
      * @return RollOnDestruction
      */
     public function getRollOnDestruction(
         PowerOfDestruction $powerOfDestruction,
         MaterialResistance $materialResistance,
-        RollOnQuality $rollOnDestruction
+        RollOnQuality $rollOnDestructing
     ): RollOnDestruction
     {
-        return new RollOnDestruction($powerOfDestruction, $materialResistance, $rollOnDestruction);
+        return new RollOnDestruction($powerOfDestruction, $materialResistance, $rollOnDestructing);
     }
 }
