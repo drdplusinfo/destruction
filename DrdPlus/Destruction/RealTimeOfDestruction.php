@@ -3,13 +3,14 @@ declare(strict_types=1); // on PHP 7+ can be methods strict to scalar types of g
 
 namespace DrdPlus\Destruction;
 
+use DrdPlus\Calculations\SumAndRound;
 use DrdPlus\Tables\Measurements\Fatigue\Fatigue;
 use DrdPlus\Tables\Measurements\Time\Time;
 use DrdPlus\Tables\Measurements\Time\TimeBonus;
 use DrdPlus\Tables\Tables;
 
 /**
- * @link https://pph.plus.info/#vypocet_skutecne_doby_niceni
+ * @link https://pph.drdplus.info/#vypocet_skutecne_doby_niceni
  */
 class RealTimeOfDestruction extends TimeBonus
 {
@@ -33,6 +34,6 @@ class RealTimeOfDestruction extends TimeBonus
     public function getFatigue(): Fatigue
     {
         /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
-        return new Fatigue($this->getTime(Time::MINUTE), $this->tables->getFatigueTable());
+        return new Fatigue(SumAndRound::round($this->getTime(Time::MINUTE)->getValue()), $this->tables->getFatigueTable());
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1); // on PHP 7+ are standard PHP methods strict to types o
 namespace DrdPlus\Destruction;
 
 use DrdPlus\Tables\Measurements\Distance\Distance;
+use DrdPlus\Tables\Measurements\Fatigue\Fatigue;
 use DrdPlus\Tables\Measurements\Time\TimeBonus;
 use DrdPlus\Tables\Measurements\Volume\Volume;
 use DrdPlus\Tables\Measurements\Volume\VolumeTable;
@@ -21,15 +22,16 @@ class RealTimeOfDestructionTest extends TestWithMockery
     {
         $realTimeOfDestruction = new RealTimeOfDestruction(
             $this->createBaseTimeOfDestruction(123),
-            $this->createRollOnDestruction(456),
+            $this->createRollOnDestruction(24),
             Tables::getIt()
         );
-        self::assertSame(123 - 456, $realTimeOfDestruction->getValue());
+        self::assertSame(99 /* 123 - 24 */, $realTimeOfDestruction->getValue());
         self::assertInstanceOf(
             TimeBonus::class,
             $realTimeOfDestruction,
             RealTimeOfDestruction::class . ' should be usable as a ' . TimeBonus::class
         );
+        self::assertEquals(new Fatigue(14000 /* bonus 99 */, Tables::getIt()->getFatigueTable()), $realTimeOfDestruction->getFatigue());
     }
 
     /**
