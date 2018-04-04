@@ -5,6 +5,7 @@ namespace DrdPlus\Tests\Destruction;
 
 use DrdPlus\Destruction\BaseTimeOfDestruction;
 use DrdPlus\Properties\Body\Size;
+use DrdPlus\Tables\Measurements\Square\SquareBonus;
 use DrdPlus\Tables\Measurements\Time\TimeBonus;
 use DrdPlus\Tables\Measurements\Time\TimeTable;
 use DrdPlus\Tables\Measurements\Volume\VolumeBonus;
@@ -17,7 +18,7 @@ class BaseTimeOfDestructionTest extends TestWithMockery
     /**
      * @test
      */
-    public function It_is_time_bonus()
+    public function It_is_time_bonus(): void
     {
         $baseTimeOfDestruction = new BaseTimeOfDestruction(new IntegerObject(123), new TimeTable());
         self::assertInstanceOf(TimeBonus::class, $baseTimeOfDestruction);
@@ -29,7 +30,7 @@ class BaseTimeOfDestructionTest extends TestWithMockery
      * @param int $size
      * @param int $expectedTimeBonus
      */
-    public function I_can_create_it_for_a_size_body_size_and_volume(int $size, int $expectedTimeBonus)
+    public function I_can_create_it_for_an_item_size_and_body_size_and_volume_and_square(int $size, int $expectedTimeBonus): void
     {
         $directly = new BaseTimeOfDestruction(new IntegerObject($size), Tables::getIt()->getTimeTable());
         self::assertSame($expectedTimeBonus, $directly->getValue());
@@ -48,9 +49,16 @@ class BaseTimeOfDestructionTest extends TestWithMockery
         );
         self::assertSame($expectedTimeBonus, $forVolume->getValue());
         self::assertEquals($directly, $forVolume);
+
+        $forSquare = BaseTimeOfDestruction::createForItemOfSquare(
+            new SquareBonus($size, Tables::getIt()->getSquareTable()),
+            Tables::getIt()->getTimeTable()
+        );
+        self::assertSame($expectedTimeBonus, $forSquare->getValue());
+        self::assertEquals($directly, $forSquare);
     }
 
-    public function provideSizeAndExpectedTimeBOnus()
+    public function provideSizeAndExpectedTimeBOnus(): array
     {
         return [
             [123, 174],

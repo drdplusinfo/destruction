@@ -4,6 +4,7 @@ declare(strict_types=1); // on PHP 7+ are standard PHP methods strict to types o
 namespace DrdPlus\Destruction;
 
 use DrdPlus\Properties\Body\Size;
+use DrdPlus\Tables\Measurements\Square\SquareBonus;
 use DrdPlus\Tables\Measurements\Time\TimeBonus;
 use DrdPlus\Tables\Measurements\Time\TimeTable;
 use DrdPlus\Tables\Measurements\Volume\VolumeBonus;
@@ -47,5 +48,15 @@ class BaseTimeOfDestruction extends TimeBonus
     public static function createForItemOfVolume(VolumeBonus $volumeBonus, TimeTable $timeTable): BaseTimeOfDestruction
     {
         return new static($volumeBonus, $timeTable);
+    }
+
+    /**
+     * @param SquareBonus $squareBonus
+     * @param TimeTable $timeTable
+     * @return BaseTimeOfDestruction
+     */
+    public static function createForItemOfSquare(SquareBonus $squareBonus, TimeTable $timeTable): BaseTimeOfDestruction
+    {
+        return new static($squareBonus, $timeTable);
     }
 }
