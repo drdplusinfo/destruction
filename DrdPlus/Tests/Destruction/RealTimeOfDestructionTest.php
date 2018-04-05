@@ -68,18 +68,18 @@ class RealTimeOfDestructionTest extends TestWithMockery
         $volume = new Volume(5 * 3 * 0.2, Volume::CUBIC_METER, Tables::getIt()->getDistanceTable());
         self::assertSame(3.0, $volume->getValue());
         $volumeBonus = $volume->getBonus();
-        self::assertSame(10, $volumeBonus->getValue());
+        self::assertSame(9, $volumeBonus->getValue());
         $baseTimeOfDestructionByVolume = BaseTimeOfDestruction::createForItemOfVolume(
             $volumeBonus,
             Tables::getIt()->getTimeTable()
         );
-        self::assertSame(61, $baseTimeOfDestructionByVolume->getValue());
+        self::assertSame(60, $baseTimeOfDestructionByVolume->getValue());
         $realTimeOfDestructionByVolume = new RealTimeOfDestruction(
             $baseTimeOfDestructionByVolume,
             $this->createRollOnDestruction(30 /* strength, luck */ - 18 /* material */),
             Tables::getIt()
         );
-        self::assertSame(49, $realTimeOfDestructionByVolume->getValue());
+        self::assertSame(48, $realTimeOfDestructionByVolume->getValue());
         $realTimeOfDestructionByVolume->getFatigue();
 
         $a = new Distance(5, Distance::METER, Tables::getIt()->getDistanceTable());
