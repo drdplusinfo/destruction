@@ -7,7 +7,6 @@ use DrdPlus\Tables\Measurements\Distance\Distance;
 use DrdPlus\Tables\Measurements\Fatigue\Fatigue;
 use DrdPlus\Tables\Measurements\Time\TimeBonus;
 use DrdPlus\Tables\Measurements\Volume\Volume;
-use DrdPlus\Tables\Measurements\Volume\VolumeTable;
 use DrdPlus\Tables\Tables;
 use Granam\Integer\IntegerObject;
 use Granam\Tests\Tools\TestWithMockery;
@@ -18,7 +17,7 @@ class RealTimeOfDestructionTest extends TestWithMockery
     /**
      * @test
      */
-    public function I_can_use_it()
+    public function I_can_use_it(): void
     {
         $realTimeOfDestruction = new RealTimeOfDestruction(
             $this->createBaseTimeOfDestruction(123),
@@ -64,9 +63,9 @@ class RealTimeOfDestructionTest extends TestWithMockery
      * @link https://pph.drdplus.info/#priklad_skutecne_doby_rozbijeni_steny
      * @test
      */
-    public function Kroll_magnus_destroys_wall_in_expected_time()
+    public function Kroll_magnus_destroys_wall_in_expected_time(): void
     {
-        $volume = new Volume(5 * 3 * 0.2, Volume::CUBIC_METER, new VolumeTable());
+        $volume = new Volume(5 * 3 * 0.2, Volume::CUBIC_METER, Tables::getIt()->getDistanceTable());
         self::assertSame(3.0, $volume->getValue());
         $volumeBonus = $volume->getBonus();
         self::assertSame(10, $volumeBonus->getValue());

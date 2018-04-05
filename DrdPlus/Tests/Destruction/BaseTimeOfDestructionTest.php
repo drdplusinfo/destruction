@@ -44,7 +44,7 @@ class BaseTimeOfDestructionTest extends TestWithMockery
         self::assertEquals($directly, $forBodySize);
 
         $forVolume = BaseTimeOfDestruction::createForItemOfVolume(
-            new VolumeBonus($size, Tables::getIt()->getVolumeTable()),
+            new VolumeBonus($size, Tables::getIt()->getDistanceTable()),
             Tables::getIt()->getTimeTable()
         );
         self::assertSame($expectedTimeBonus, $forVolume->getValue());
