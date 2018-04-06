@@ -26,39 +26,39 @@ class BaseTimeOfDestructionTest extends TestWithMockery
 
     /**
      * @test
-     * @dataProvider provideSizeAndExpectedTimeBOnus
-     * @param int $size
+     * @dataProvider provideValueAndExpectedTimeBOnus
+     * @param int $value
      * @param int $expectedTimeBonus
      */
-    public function I_can_create_it_for_an_item_size_and_body_size_and_volume_and_square(int $size, int $expectedTimeBonus): void
+    public function I_can_create_it_for_an_item_size_and_body_size_and_volume_and_square(int $value, int $expectedTimeBonus): void
     {
-        $directly = new BaseTimeOfDestruction(new IntegerObject($size), Tables::getIt()->getTimeTable());
-        self::assertSame($expectedTimeBonus, $directly->getValue());
+        $directlyCreated = new BaseTimeOfDestruction(new IntegerObject($value), Tables::getIt()->getTimeTable());
+        self::assertSame($expectedTimeBonus, $directlyCreated->getValue());
 
-        $forItemSize = BaseTimeOfDestruction::createForItemSize(new IntegerObject($size), Tables::getIt()->getTimeTable());
+        $forItemSize = BaseTimeOfDestruction::createForItemSize(new IntegerObject($value), Tables::getIt()->getTimeTable());
         self::assertSame($expectedTimeBonus, $forItemSize->getValue());
-        self::assertEquals($directly, $forItemSize);
+        self::assertEquals($directlyCreated, $forItemSize);
 
-        $forBodySize = BaseTimeOfDestruction::createForBodySize(Size::getIt($size), Tables::getIt()->getTimeTable());
+        $forBodySize = BaseTimeOfDestruction::createForBodySize(Size::getIt($value), Tables::getIt()->getTimeTable());
         self::assertSame($expectedTimeBonus, $forBodySize->getValue());
-        self::assertEquals($directly, $forBodySize);
+        self::assertEquals($directlyCreated, $forBodySize);
 
         $forVolume = BaseTimeOfDestruction::createForItemOfVolume(
-            new VolumeBonus($size, Tables::getIt()->getDistanceTable()),
+            new VolumeBonus($value, Tables::getIt()->getDistanceTable()),
             Tables::getIt()->getTimeTable()
         );
         self::assertSame($expectedTimeBonus, $forVolume->getValue());
-        self::assertEquals($directly, $forVolume);
+        self::assertEquals($directlyCreated, $forVolume);
 
         $forSquare = BaseTimeOfDestruction::createForItemOfSquare(
-            new SquareBonus($size, Tables::getIt()->getSquareTable()),
+            new SquareBonus($value, Tables::getIt()->getDistanceTable()),
             Tables::getIt()->getTimeTable()
         );
         self::assertSame($expectedTimeBonus, $forSquare->getValue());
-        self::assertEquals($directly, $forSquare);
+        self::assertEquals($directlyCreated, $forSquare);
     }
 
-    public function provideSizeAndExpectedTimeBOnus(): array
+    public function provideValueAndExpectedTimeBOnus(): array
     {
         return [
             [123, 174],

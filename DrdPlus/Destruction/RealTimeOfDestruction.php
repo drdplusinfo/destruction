@@ -23,6 +23,7 @@ class RealTimeOfDestruction extends TimeBonus
         Tables $tables
     )
     {
+        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         parent::__construct($baseTimeOfDestruction->getValue() - $rollOnDestruction->getValue(), $tables->getTimeTable());
         $this->tables = $tables;
     }
