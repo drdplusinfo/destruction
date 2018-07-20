@@ -14,7 +14,8 @@
     "drd-plus/tables": "^1.0",
     "drd-plus/dice-rolls": "^4.1",
     "drd-plus/rolls-on": "^1.0",
-    "drd-plus/properties": "^1.0"
+    "drd-plus/properties": "^1.0",
+    "drd-plus/armourer": "^1.0"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master",

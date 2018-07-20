@@ -3,6 +3,7 @@ declare(strict_types=1); // on PHP 7+ are standard PHP methods strict to types o
 
 namespace DrdPlus\Tests\Destruction;
 
+use DrdPlus\Armourer\Armourer;
 use DrdPlus\Codes\Armaments\MeleeWeaponCode;
 use DrdPlus\Codes\Environment\MaterialCode;
 use DrdPlus\Codes\ItemHoldingCode;
@@ -12,7 +13,6 @@ use DrdPlus\Destruction\MaterialResistance;
 use DrdPlus\Destruction\RollOnDestruction;
 use DrdPlus\Properties\Base\Strength;
 use DrdPlus\RollsOn\QualityAndSuccess\RollOnQuality;
-use DrdPlus\Tables\Armaments\Armourer;
 use DrdPlus\Tables\Environments\MaterialResistancesTable;
 use DrdPlus\Tables\Tables;
 use Granam\Tests\Tools\TestWithMockery;
@@ -23,7 +23,7 @@ class DestructionTest extends TestWithMockery
     /**
      * @test
      */
-    public function I_can_get_power_of_destruction()
+    public function I_can_get_power_of_destruction(): void
     {
         $hand = MeleeWeaponCode::getIt(MeleeWeaponCode::HAND);
         $strength = Strength::getIt(123);
@@ -33,42 +33,32 @@ class DestructionTest extends TestWithMockery
             ->once()
             ->with($hand, $strength, $itemHoldingCode, false)
             ->andReturn(456);
+        $armourer->shouldReceive('getTables')
+            ->andReturn(Tables::getIt());
         /** @var Armourer $armourer */
-        $destruction = new Destruction($this->createTablesWithArmourer($armourer));
+        $destruction = new Destruction($armourer);
         $powerOfDestruction = $destruction->getPowerOfDestruction($hand, $strength, $itemHoldingCode, false);
-        self::assertInstanceOf(PowerOfDestruction::class, $powerOfDestruction);
         self::assertSame(456, $powerOfDestruction->getValue());
-    }
-
-    /**
-     * @param Armourer $armourer
-     * @return Tables|MockInterface
-     */
-    private function createTablesWithArmourer(Armourer $armourer): Tables
-    {
-        $tables = $this->mockery(Tables::class);
-        $tables->shouldReceive('getArmourer')
-            ->atLeast()->once()
-            ->andReturn($armourer);
-
-        return $tables;
     }
 
     /**
      * @test
      */
-    public function I_can_get_material_resistance()
+    public function I_can_get_material_resistance(): void
     {
         $bronze = MaterialCode::getIt(MaterialCode::BRONZE);
+        $armourer = $this->mockery(Armourer::class);
         $materialResistancesTable = $this->mockery(MaterialResistancesTable::class);
         $materialResistancesTable->shouldReceive('getResistanceOfMaterial')
             ->once()
             ->with($bronze)
             ->andReturn(777);
         /** @var MaterialResistancesTable $materialResistancesTable */
-        $destruction = new Destruction($this->createTablesWithMaterialResistancesTable($materialResistancesTable));
+        $armourer->shouldReceive('getTables')
+            ->andReturn($this->createTablesWithMaterialResistancesTable($materialResistancesTable));
+        /** @var Armourer $armourer */
+        $destruction = new Destruction($armourer);
         $materialResistance = $destruction->getMaterialResistance($bronze);
-        self::assertInstanceOf(MaterialResistance::class, $materialResistance);
         self::assertSame(777, $materialResistance->getValue());
     }
 
@@ -89,9 +79,9 @@ class DestructionTest extends TestWithMockery
     /**
      * @test
      */
-    public function I_can_get_roll_on_destruction()
+    public function I_can_get_roll_on_destruction(): void
     {
-        $destruction = new Destruction(Tables::getIt());
+        $destruction = new Destruction(Armourer::getIt());
         $rollOnDestruction = $destruction->getRollOnDestruction(
             $powerOfDestruction = $this->createPowerOfDestruction(123),
             $materialResistance = $this->createMaterialResistance(234),

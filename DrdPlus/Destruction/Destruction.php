@@ -1,12 +1,12 @@
 <?php
 namespace DrdPlus\Destruction;
 
+use DrdPlus\Armourer\Armourer;
 use DrdPlus\Codes\Armaments\MeleeWeaponlikeCode;
 use DrdPlus\Codes\Environment\MaterialCode;
 use DrdPlus\Codes\ItemHoldingCode;
 use DrdPlus\Properties\Base\Strength;
 use DrdPlus\RollsOn\QualityAndSuccess\RollOnQuality;
-use DrdPlus\Tables\Tables;
 use Granam\Strict\Object\StrictObject;
 
 /**
@@ -14,13 +14,12 @@ use Granam\Strict\Object\StrictObject;
  */
 class Destruction extends StrictObject
 {
+    /** @var Armourer */
+    private $armourer;
 
-    /** @var Tables */
-    private $tables;
-
-    public function __construct(Tables $tables)
+    public function __construct(Armourer $armourer)
     {
-        $this->tables = $tables;
+        $this->armourer = $armourer;
     }
 
     /**
@@ -46,8 +45,7 @@ class Destruction extends StrictObject
         bool $weaponIsInappropriate
     ): PowerOfDestruction
     {
-        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
-        return new PowerOfDestruction($meleeWeaponlikeCode, $strength, $itemHoldingCode, $weaponIsInappropriate, $this->tables);
+        return new PowerOfDestruction($meleeWeaponlikeCode, $strength, $itemHoldingCode, $weaponIsInappropriate, $this->armourer);
     }
 
     /**
@@ -57,9 +55,8 @@ class Destruction extends StrictObject
      */
     public function getMaterialResistance(MaterialCode $materialCode): MaterialResistance
     {
-        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         return new MaterialResistance(
-            $this->tables->getMaterialResistancesTable()->getResistanceOfMaterial($materialCode)
+            $this->armourer->getTables()->getMaterialResistancesTable()->getResistanceOfMaterial($materialCode)
         );
     }
 

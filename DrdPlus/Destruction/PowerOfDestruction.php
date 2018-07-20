@@ -3,10 +3,10 @@ declare(strict_types=1); // on PHP 7+ are standard PHP methods strict to types o
 
 namespace DrdPlus\Destruction;
 
+use DrdPlus\Armourer\Armourer;
 use DrdPlus\Codes\Armaments\MeleeWeaponlikeCode;
 use DrdPlus\Codes\ItemHoldingCode;
 use DrdPlus\Properties\Base\Strength;
-use DrdPlus\Tables\Tables;
 use Granam\Integer\IntegerInterface;
 use Granam\Strict\Object\StrictObject;
 
@@ -24,7 +24,7 @@ class PowerOfDestruction extends StrictObject implements IntegerInterface
      * @param Strength $strength
      * @param ItemHoldingCode $itemHoldingCode
      * @param bool $weaponIsInappropriate
-     * @param Tables $tables
+     * @param Armourer $armourer
      * @throws \DrdPlus\Tables\Armaments\Exceptions\CanNotUseMeleeWeaponlikeBecauseOfMissingStrength
      * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownArmament
      * @throws \DrdPlus\Tables\Armaments\Exceptions\UnknownWeaponlike
@@ -37,10 +37,10 @@ class PowerOfDestruction extends StrictObject implements IntegerInterface
         Strength $strength,
         ItemHoldingCode $itemHoldingCode,
         bool $weaponIsInappropriate,
-        Tables $tables
+        Armourer $armourer
     )
     {
-        $this->value = $tables->getArmourer()->getPowerOfDestruction(
+        $this->value = $armourer->getPowerOfDestruction(
             $meleeWeaponlikeCode,
             $strength,
             $itemHoldingCode,
