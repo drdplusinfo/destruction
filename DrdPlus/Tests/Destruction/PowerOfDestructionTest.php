@@ -8,7 +8,6 @@ use DrdPlus\Codes\Armaments\MeleeWeaponCode;
 use DrdPlus\Codes\ItemHoldingCode;
 use DrdPlus\Destruction\PowerOfDestruction;
 use DrdPlus\Properties\Base\Strength;
-use DrdPlus\Tables\Tables;
 use Granam\Integer\IntegerInterface;
 use Granam\Tests\Tools\TestWithMockery;
 use Mockery\MockInterface;
