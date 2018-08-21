@@ -12,10 +12,10 @@
     "php": ">=7.1",
     "granam/strict-object": "^3.0",
     "drdplus/tables": "^1.0",
-    "drdplus/dice-rolls": "^4.1",
     "drdplus/rolls-on": "^1.0",
     "drdplus/properties": "^1.0",
-    "drdplus/armourer": "^1.0"
+    "drdplus/armourer": "^1.0",
+    "granam/dice-rolls": "^5.0"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master",
