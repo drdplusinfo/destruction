@@ -23,7 +23,6 @@ class RealTimeOfDestruction extends TimeBonus
         Tables $tables
     )
     {
-        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         parent::__construct($baseTimeOfDestruction->getValue() - $rollOnDestruction->getValue(), $tables->getTimeTable());
         $this->tables = $tables;
     }
@@ -34,7 +33,6 @@ class RealTimeOfDestruction extends TimeBonus
      */
     public function getFatigue(): Fatigue
     {
-        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         return new Fatigue(SumAndRound::round($this->getTime(Time::MINUTE)->getValue()), $this->tables->getFatigueTable());
     }
 }

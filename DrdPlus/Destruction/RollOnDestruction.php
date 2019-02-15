@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1); // on PHP 7+ are standard PHP methods strict to types of given parameters
+declare(strict_types=1);
 
 namespace DrdPlus\Destruction;
 
@@ -9,8 +9,8 @@ use Granam\Integer\IntegerInterface;
 
 class RollOnDestruction extends SimpleRollOnSuccess implements IntegerInterface
 {
-    const NOT_DAMAGED = 'not_damaged';
-    const DAMAGED = 'damaged';
+    public const NOT_DAMAGED = 'not_damaged';
+    public const DAMAGED = 'damaged';
 
     /**
      * @param PowerOfDestruction $powerOfDestruction
@@ -23,7 +23,6 @@ class RollOnDestruction extends SimpleRollOnSuccess implements IntegerInterface
         RollOnQuality $rollOnDestructing
     )
     {
-        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         parent::__construct(
             $materialResistance->getValue() - $powerOfDestruction->getValue(), // as a difficulty
             $rollOnDestructing,

@@ -10,11 +10,10 @@
   },
   "require": {
     "php": ">=7.1",
-    "granam/strict-object": "^3.0",
-    "drdplus/tables": "^1.0",
-    "drdplus/rolls-on": "^1.0",
-    "drdplus/properties": "^1.0",
-    "drdplus/armourer": "^1.0",
+    "drdplus/tables": "~2.0",
+    "drdplus/rolls-on": "~2.0",
+    "drdplus/properties": "~2.0",
+    "drdplus/armourer": "~2.0",
     "granam/dice-rolls": "^5.0"
   },
   "require-dev": {

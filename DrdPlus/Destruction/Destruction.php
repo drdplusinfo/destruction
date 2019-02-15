@@ -5,7 +5,7 @@ use DrdPlus\Armourer\Armourer;
 use DrdPlus\Codes\Armaments\MeleeWeaponlikeCode;
 use DrdPlus\Codes\Environment\MaterialCode;
 use DrdPlus\Codes\ItemHoldingCode;
-use DrdPlus\Properties\Base\Strength;
+use DrdPlus\BaseProperties\Strength;
 use DrdPlus\RollsOn\QualityAndSuccess\RollOnQuality;
 use Granam\Strict\Object\StrictObject;
 
@@ -60,12 +60,6 @@ class Destruction extends StrictObject
         );
     }
 
-    /**
-     * @param PowerOfDestruction $powerOfDestruction
-     * @param MaterialResistance $materialResistance
-     * @param RollOnQuality $rollOnDestructing
-     * @return RollOnDestruction
-     */
     public function getRollOnDestruction(
         PowerOfDestruction $powerOfDestruction,
         MaterialResistance $materialResistance,

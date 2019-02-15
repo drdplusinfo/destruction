@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1); // on PHP 7+ are standard PHP methods strict to types of given parameters
+declare(strict_types=1);
 
 namespace DrdPlus\Destruction;
 
@@ -15,13 +15,8 @@ use Granam\Integer\IntegerInterface;
  */
 class BaseTimeOfDestruction extends TimeBonus
 {
-    /**
-     * @param IntegerInterface $itemSize
-     * @param TimeTable $timeTable
-     */
     public function __construct(IntegerInterface $itemSize, TimeTable $timeTable)
     {
-        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         parent::__construct($itemSize->getValue() + 51, $timeTable);
     }
 
@@ -30,31 +25,16 @@ class BaseTimeOfDestruction extends TimeBonus
         return new static($itemSize, $timeTable);
     }
 
-    /**
-     * @param Size $size
-     * @param TimeTable $timeTable
-     * @return BaseTimeOfDestruction
-     */
     public static function createForBodySize(Size $size, TimeTable $timeTable): BaseTimeOfDestruction
     {
         return new static($size, $timeTable);
     }
 
-    /**
-     * @param VolumeBonus $volumeBonus
-     * @param TimeTable $timeTable
-     * @return BaseTimeOfDestruction
-     */
     public static function createForItemOfVolume(VolumeBonus $volumeBonus, TimeTable $timeTable): BaseTimeOfDestruction
     {
         return new static($volumeBonus, $timeTable);
     }
 
-    /**
-     * @param SquareBonus $squareBonus
-     * @param TimeTable $timeTable
-     * @return BaseTimeOfDestruction
-     */
     public static function createForItemOfSquare(SquareBonus $squareBonus, TimeTable $timeTable): BaseTimeOfDestruction
     {
         return new static($squareBonus, $timeTable);

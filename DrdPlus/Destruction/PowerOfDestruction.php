@@ -1,12 +1,12 @@
 <?php
-declare(strict_types=1); // on PHP 7+ are standard PHP methods strict to types of given parameters
+declare(strict_types=1);
 
 namespace DrdPlus\Destruction;
 
 use DrdPlus\Armourer\Armourer;
 use DrdPlus\Codes\Armaments\MeleeWeaponlikeCode;
 use DrdPlus\Codes\ItemHoldingCode;
-use DrdPlus\Properties\Base\Strength;
+use DrdPlus\BaseProperties\Strength;
 use Granam\Integer\IntegerInterface;
 use Granam\Strict\Object\StrictObject;
 

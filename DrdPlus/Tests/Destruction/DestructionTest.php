@@ -11,7 +11,7 @@ use DrdPlus\Destruction\Destruction;
 use DrdPlus\Destruction\PowerOfDestruction;
 use DrdPlus\Destruction\MaterialResistance;
 use DrdPlus\Destruction\RollOnDestruction;
-use DrdPlus\Properties\Base\Strength;
+use DrdPlus\BaseProperties\Strength;
 use DrdPlus\RollsOn\QualityAndSuccess\RollOnQuality;
 use DrdPlus\Tables\Environments\MaterialResistancesTable;
 use DrdPlus\Tables\Tables;
