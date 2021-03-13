@@ -1,4 +1,4 @@
-<?php declare(strict_types=1); // on PHP 7+ are standard PHP methods strict to types of given parameters
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\Destruction;
 
@@ -10,7 +10,7 @@ use DrdPlus\Tables\Measurements\Time\TimeTable;
 use DrdPlus\Tables\Measurements\Volume\VolumeBonus;
 use DrdPlus\Tables\Tables;
 use Granam\Integer\IntegerObject;
-use Granam\Tests\Tools\TestWithMockery;
+use Granam\TestWithMockery\TestWithMockery;
 
 class BaseTimeOfDestructionTest extends TestWithMockery
 {

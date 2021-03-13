@@ -1,4 +1,4 @@
-<?php declare(strict_types=1); // on PHP 7+ are standard PHP methods strict to types of given parameters
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\Destruction;
 
@@ -14,7 +14,7 @@ use DrdPlus\BaseProperties\Strength;
 use DrdPlus\RollsOn\QualityAndSuccess\RollOnQuality;
 use DrdPlus\Tables\Environments\MaterialResistancesTable;
 use DrdPlus\Tables\Tables;
-use Granam\Tests\Tools\TestWithMockery;
+use Granam\TestWithMockery\TestWithMockery;
 use Mockery\MockInterface;
 
 class DestructionTest extends TestWithMockery

@@ -1,14 +1,17 @@
-<?php declare(strict_types=1); // on PHP 7+ are standard PHP methods strict to types of given parameters
+<?php declare(strict_types=1);
 
-namespace DrdPlus\Destruction;
+namespace DrdPlus\Tests\Destruction;
 
+use DrdPlus\Destruction\BaseTimeOfDestruction;
+use DrdPlus\Destruction\RealTimeOfDestruction;
+use DrdPlus\Destruction\RollOnDestruction;
 use DrdPlus\Tables\Measurements\Distance\Distance;
 use DrdPlus\Tables\Measurements\Fatigue\Fatigue;
 use DrdPlus\Tables\Measurements\Time\TimeBonus;
 use DrdPlus\Tables\Measurements\Volume\Volume;
 use DrdPlus\Tables\Tables;
 use Granam\Integer\IntegerObject;
-use Granam\Tests\Tools\TestWithMockery;
+use Granam\TestWithMockery\TestWithMockery;
 use Mockery\MockInterface;
 
 class RealTimeOfDestructionTest extends TestWithMockery
